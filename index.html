@@ -124,20 +124,47 @@
         .sidebar {
             position: fixed;
             top: 0;
-            right: -250px; /* Hidden state */
+            right: -250px; /* מוסתר מחוץ למסך */
             width: var(--sidebar-width);
             height: 100%;
             background: #fff;
             box-shadow: -2px 0 10px rgba(0,0,0,0.1);
             transition: right 0.3s ease-in-out;
-            z-index: 50;
+            z-index: 100; /* Z-index גבוה כדי לכסות הכל */
             padding: 20px;
             box-sizing: border-box;
             overflow-y: auto;
             text-align: right;
         }
         .sidebar.open {
-            right: 0; /* Visible state */
+            right: 0; /* מצב פתוח: נכנס למסך */
+            z-index: 100;
+        }
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 30px;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            cursor: pointer;
+            color: #333;
+            line-height: 1;
+        }
+        /* סגנון לכיסוי השחור שמופיע מאחורי הסרגל */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 90; /* מתחת לסרגל אבל מעל שאר התוכן */
+            cursor: pointer;
+        }
+        .overlay.show {
+            display: block;
         }
         /* Responsive */
         @media (max-width:900px){
@@ -160,7 +187,7 @@
 <body>
     <div class="overlay" id="sidebar-overlay"></div>
     <div class="sidebar" id="sidebar">
-        <button class="close-sidebar" id="close-sidebar-btn">×</button>
+        <button class="close-sidebar" id="close-sidebar-btn">×</button> 
         <h3>תוכן עניינים ✨</h3>
         <ul>
             <li><a href="#product-description">אודות המוצר</a></li>
@@ -287,7 +314,7 @@
     
     <script>
         // 🛑 STEP 1: Replace 'YOUR_USER_ID' with your actual EmailJS User ID
-        emailjs.init('ecHybfD_vT68aQGnO');
+        emailjs.init('ecHybfD_vT68aQGnO'); 
 
         const PRICE_PER_BOOK = 45; 
         
@@ -450,32 +477,21 @@
             const slidesEl = document.getElementById('slides');
             const slides = Array.from(slidesEl.children);
             if (slides.length <= 1) return; // Disable carousel if only one slide
-            const dotsEl = document.getElementById('dots');
-            const prev = document.getElementById('prev');
-            const next = document.getElementById('next');
+            // const dotsEl = document.getElementById('dots'); // לא קיים ב-HTML
+            // const prev = document.getElementById('prev'); // לא קיים ב-HTML
+            // const next = document.getElementById('next'); // לא קיים ב-HTML
             let index = 0;
             const intervalMs = 3000;
             let timer = null;
-
-            slides.forEach((s,i)=>{
-                const d = document.createElement('div'); 
-                d.className='dot'; 
-                d.dataset.i=i; 
-                d.addEventListener('click',()=>goTo(i)); 
-                dotsEl.appendChild(d);
-            });
+            
 
             function update(){
-                slidesEl.style.transform = `translateX(${-index*100}%)`;
-                Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle('active', i===index));
+                if (slidesEl) slidesEl.style.transform = `translateX(${-index*100}%)`;
             }
 
             function nextSlide(){ index = (index+1) % slides.length; update(); }
             function prevSlide(){ index = (index-1 + slides.length) % slides.length; update(); }
             function goTo(i){ index = ((i%slides.length)+slides.length)%slides.length; update(); resetTimer(); }
-
-            prev.addEventListener('click', ()=>{ prevSlide(); resetTimer(); });
-            next.addEventListener('click', ()=>{ nextSlide(); resetTimer(); });
 
             function startTimer(){ if(timer) clearInterval(timer); timer = setInterval(nextSlide, intervalMs); }
             function resetTimer(){ startTimer(); }
@@ -540,7 +556,3 @@
 </body>
 
 </html>
-
-
-
-
