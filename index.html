@@ -44,9 +44,67 @@
         .btn:hover{background:#004d40;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,105,92,0.3)}
         .price{font-size:20px;font-weight:700;color:#111}
         .natural-text { color: var(--accent); font-weight: 600; }
+        
+        /* Coupon Styles */
+        .coupon-section {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start; 
+            margin-top: 15px;
+            flex-direction: column; 
+            align-items: center; /* Center coupon elements inside modal */
+        }
+        .coupon-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .coupon-section input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 120px;
+            font-size: 14px;
+            text-align: center;
+            direction: ltr; 
+        }
+        .btn-apply {
+            background: #fff;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn-apply:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        .coupon-msg {
+            font-size: 13px;
+            font-weight: 600;
+            min-height: 20px;
+            text-align: center;
+        }
+        .coupon-msg.success { color: var(--success); }
+        .coupon-msg.error { color: var(--error); }
+
 
         .carousel-wrap{width:520px;max-width:48%;min-width:300px;background: #f5f5f5;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
         .slide img{width:100%;height:100%;object-fit:cover;display:block}
+
+        /* Modal Styles */
+        .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;overflow-y: auto;}
+        .modal.show{display:flex}
+        .modal-content{background:#fff;padding:30px;border-radius:16px;max-width:400px;width:90%;text-align:right;box-shadow:0 20px 60px rgba(0,0,0,0.3); margin: 50px 0;}
+        .modal h2{margin:0 0 15px;color:var(--accent); text-align: center;}
+        .modal p{margin:10px 0;line-height:1.6}
+        .modal-buttons{display:flex;gap:10px;margin-top:20px;justify-content:center; flex-wrap: wrap;}
+        select{width:70px;padding:5px;border-radius:6px;border:1px solid #ccc;font-size:14px;text-align:center;cursor:pointer}
+        .form-group{margin-bottom: 15px; text-align: right;}
 
         /* --- Sidebar Styles --- */
         #sidebar-toggle {
@@ -81,56 +139,6 @@
         .sidebar.open {
             right: 0; /* Visible state */
         }
-        .sidebar h3 {
-            color: var(--accent);
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-        .sidebar li {
-            margin-bottom: 10px;
-        }
-        .sidebar a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            display: block;
-            padding: 8px;
-            border-radius: 6px;
-            transition: background 0.2s;
-        }
-        .sidebar a:hover {
-            background: var(--bg);
-            color: var(--accent);
-        }
-        .close-sidebar {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 40;
-        }
-        .overlay.show {
-            display: block;
-        }
-
         /* Responsive */
         @media (max-width:900px){
             .card{flex-direction:column-reverse}
@@ -200,36 +208,18 @@
                 </p>
 
                 <h2 id="order-form">🎁 הזמנה ותשלום</h2>
-                <p>בחרו את כמות הסבונים הרצויה, ואנו נדאג לייצר ולשלוח אליכם את המוצר הטרי ביותר.</p>
                 
-                <label for="copies">כמות סבונים (יחידות):</label>
-                <select id="copies">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-                
-                <div class="cta">
-                    <div class="price-container">
-                        <span class="old-price" id="oldPrice"></span>
-                        <div class="price" id="totalPrice">₪45</div>
-                    </div>
-                    <button class="btn" id="payBtn">רכישה ותיאום משלוח</button>
+                <div class="cta" style="margin-top: 30px;">
+                    <button class="btn" id="openOrderModalBtn" style="width: 100%;">להזמנה ולמעבר לתשלום 🛒</button>
                 </div>
+                
             </div>
 
             <div class="carousel-wrap" aria-roledescription="carousel">
                 <div class="slides-container">
                     <div class="slides" id="slides">
                         <div class="slide"><img alt="סבון מחלב אם טבעי" src="https://i.imgur.com/CQZCkT5.jpeg"/></div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -237,8 +227,38 @@
 
     <div class="modal" id="shippingModal">
         <div class="modal-content">
-            <h2>פרטי משלוח וקשר 📦</h2>
-            <p>אנא מלאו את הפרטים לתאום המשלוח:</p>
+            <h2>הזמנה ופרטי משלוח 📦</h2>
+            <p>אנא בחרו כמות ומלאו פרטים:</p>
+            
+            <div class="form-group" style="text-align: center;">
+                <label for="copies" style="font-size: 16px; margin-bottom: 8px;">כמות סבונים (יחידות):</label>
+                <select id="copies" style="width: 100px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <div class="price-container" style="margin-top: 15px;">
+                    <span class="old-price" id="oldPrice" style="font-size: 14px;"></span>
+                    <div class="price" id="totalPrice" style="font-size: 24px;">₪45</div>
+                </div>
+            </div>
+
+            <div class="coupon-section">
+                <div class="coupon-input-group">
+                    <input type="text" id="couponCode" placeholder="קוד קופון">
+                    <button type="button" class="btn-apply" id="applyCouponBtn">החל</button>
+                </div>
+                <div class="coupon-msg" id="couponMsg"></div>
+            </div>
+            <hr style="border: 0; border-top: 1px dashed #eee; margin: 20px 0;">
+
             <div class="form-group"><label for="shippingName">שם מלא</label><input type="text" id="shippingName" required placeholder="שם ושם משפחה"></div>
             <div class="form-group"><label for="shippingPhone">טלפון</label><input type="tel" id="shippingPhone" required placeholder="05X-XXXXXXX"></div>
             <div class="form-group"><label for="shippingEmail">דוא"ל</label><input type="email" id="shippingEmail" required placeholder="example@mail.com"></div>
@@ -267,39 +287,91 @@
     
     <script>
         // 🛑 STEP 1: Replace 'YOUR_USER_ID' with your actual EmailJS User ID
-        // Note: The original ID 'P5NmDjpFs_fgKFY9I' is used as a placeholder
         emailjs.init('P5NmDjpFs_fgKFY9I');
 
-        const PRICE_PER_BOOK = 45; // Changed price to 45 for soap
+        const PRICE_PER_BOOK = 45; 
         
+        // --- Coupon Logic Variables ---
+        const COUPONS = {
+            'TALYA20': 0.20, 
+            'TALYA10': 0.10  
+        };
+        let isDiscountApplied = false;
+        let discountRate = 0; 
+
         // Elements
         const copiesInput = document.getElementById('copies');
         const totalPriceEl = document.getElementById('totalPrice');
         const oldPriceEl = document.getElementById('oldPrice'); 
-        const payBtn = document.getElementById('payBtn');
+        
+        // NEW: Button to open the order modal
+        const openOrderModalBtn = document.getElementById('openOrderModalBtn'); 
+
         const shippingModal = document.getElementById('shippingModal');
         const continueToPaymentBtn = document.getElementById('continueToPaymentBtn');
         const paymentModal = document.getElementById('paymentModal');
         const paymentTotalAmount = document.getElementById('paymentTotalAmount');
         const openBitApp = document.getElementById('openBitApp'); 
+
+        // Coupon Elements
+        const couponInput = document.getElementById('couponCode');
+        const applyCouponBtn = document.getElementById('applyCouponBtn');
+        const couponMsg = document.getElementById('couponMsg');
+
+        // Sidebar Elements
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebar-toggle');
         const closeSidebarBtn = document.getElementById('close-sidebar-btn');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-        // Global variable to store order details for EmailJS
+
         let currentOrderData = {};
 
         function updateTotal() {
             const quantity = parseInt(copiesInput.value) || 1;
-            const total = PRICE_PER_BOOK * quantity;
+            let total = PRICE_PER_BOOK * quantity;
             
-            // NOTE: Coupon logic removed as per request to simplify, but price update remains
-            oldPriceEl.classList.remove('show');
-            
+            if (isDiscountApplied) {
+                const originalTotal = total;
+                total = total * (1 - discountRate);
+                total = Math.round(total);  
+                
+                oldPriceEl.textContent = `₪${originalTotal}`;
+                oldPriceEl.classList.add('show');
+            } else {
+                oldPriceEl.classList.remove('show');
+            }
+
             totalPriceEl.textContent = `₪${total}`;
             paymentTotalAmount.textContent = `₪${total}`; 
         }
+
+        function applyCoupon() {
+            const inputCode = couponInput.value.trim().toUpperCase();
+            
+            if (COUPONS.hasOwnProperty(inputCode)) {
+                if (!isDiscountApplied) {
+                    isDiscountApplied = true;
+                    discountRate = COUPONS[inputCode]; 
+                    const discountPercent = discountRate * 100;
+
+                    couponMsg.textContent = `הקופון הופעל בהצלחה! (${discountPercent}% הנחה)`;
+                    couponMsg.className = "coupon-msg success";
+                    
+                    couponInput.disabled = true; 
+                    applyCouponBtn.disabled = true;
+                    applyCouponBtn.textContent = "V";
+                    updateTotal();
+                }
+            } else if (inputCode === "") {
+                couponMsg.textContent = "אנא הזן קוד קופון";
+                couponMsg.className = "coupon-msg error";
+            } else {
+                couponMsg.textContent = "קוד קופון שגוי";
+                couponMsg.className = "coupon-msg error";
+            }
+        }
+
 
         function closeModal(modalElement) {
             modalElement.classList.remove('show');
@@ -321,9 +393,7 @@
                 const targetId = link.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    // Smooth scroll to element
                     targetElement.scrollIntoView({ behavior: 'smooth' });
-                    // Close sidebar after click
                     toggleSidebar();
                 }
             });
@@ -336,10 +406,7 @@
                 return;
             }
 
-            // 🛑 STEP 2: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-            // Note: The original IDs are used as placeholders. You'd need to create a new template for the soap product.
             emailjs.send('service_cprtcca', 'template_50ax085', {
-                // Changed 'to_email' to a generic placeholder. Replace with actual recipient.
                 to_email: 'seller@example.com', 
                 name: currentOrderData.name,
                 phone: currentOrderData.phone,
@@ -359,8 +426,24 @@
 
 
         // --- Event Listeners and Logic ---
+        
+        // NEW: Open Shipping Modal
+        openOrderModalBtn.addEventListener('click', ()=>{ 
+            updateTotal();
+            shippingModal.classList.add('show'); 
+        });
+
+        // Price and Coupon Logic moved to be active inside the modal
         copiesInput.addEventListener('change', updateTotal);
+        applyCouponBtn.addEventListener('click', applyCoupon);
+        couponInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                applyCoupon();
+            }
+        });
+        
         updateTotal(); 
+
 
         // Carousel Logic (kept for basic image display)
         (function(){
@@ -405,11 +488,6 @@
             update();
         })();
 
-        // Open Shipping Modal
-        payBtn.addEventListener('click', ()=>{ 
-            updateTotal();
-            shippingModal.classList.add('show'); 
-        });
 
         // Handle 'Continue to Payment' button (Validation & Data Storage)
         continueToPaymentBtn.addEventListener('click', (e)=>{
@@ -426,21 +504,15 @@
                 return;
             }
             
-            // Store validated data
             currentOrderData = { name, phone, email, city, address, copies, totalPrice }; 
 
-            // Hide Shipping Modal and Show Payment Modal
             closeModal(shippingModal);
             paymentModal.classList.add('show');
         });
 
         openBitApp.addEventListener('click', ()=>{
-            // 1. Trigger the Email Send
             sendOrderEmail(); 
-
-            // 2. Simulate a payment link opening (You'll need to replace this with your actual payment link logic)
             alert('פרטי ההזמנה נשלחו בהצלחה! כעת תועברו למערכת התשלום (סימולציה).');
-            // Simulate a new tab opening for payment
             window.open('https://example.com/payment-link', '_blank');
 
             closeModal(paymentModal);
