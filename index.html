@@ -2,17 +2,19 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>מוצרי חלב אם: סבון טבעי + תפריט</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <title>🧼 סבון טבעי מחלב אם: הזנה מהאם לתינוק</title>
     <style>
         :root{
             --gap:18px;
-            --accent:#00695C; /* Dark Teal - A calm, natural color */
-            --bg:#e0f7fa; /* Light Cyan */
+            --accent:#00695C; /* Dark Teal - for a natural/calm feel */
+            --new-accent:#E91E63; /* NEW: Vivid Pink for headlines */
+            --bg:#e0f7fa; /* Light Cyan Background */
             --text:#222;
             --success: #28a745;
             --error: #dc3545;
             --sidebar-width: 250px;
+            --soft-white: #fefefe; 
         }
         html,body{
             height:100%;
@@ -20,97 +22,360 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Hebrew', sans-serif;
             background: var(--bg);
             color:var(--text);
-            overflow-x: hidden;
+            overflow-x: hidden; 
+            font-size: 18px; /* Base font size increase */
         }
-        .app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box; flex-direction: column;}
-        .logo-container {
-            margin-bottom: 24px;
-            text-align: center;
+        /* FIXED: Adjusted padding-top now that logo is static */
+        .app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;padding-top: 24px;box-sizing:border-box; flex-direction: column;}
+        
+        .card{
+            width:100%;
+            max-width:1100px;
+            background:linear-gradient(180deg,var(--soft-white),#fbfbfb);
+            border-radius:16px;
+            box-shadow:0 12px 40px rgba(0,0,0,0.15);
+            overflow:hidden;
+            display:block; /* Changed from flex to block */
         }
-        .logo {
-            max-width: 200px;
-            height: auto;
-        }
-        .card{width:100%;max-width:1100px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.08);overflow:hidden;display:flex;gap:var(--gap);flex-direction:row-reverse; position: relative;}
+        
+        /* ADJUSTED: Content padding reset for desktop */
         .content{flex:1;min-width:260px;padding:28px;display:flex;flex-direction:column;gap:14px}
-        h1{margin:0;font-size:24px; color: var(--accent);}
-        h2{font-size: 20px; color: var(--accent); border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 25px;}
-        p{margin:0;line-height:1.7}
-        .lead{font-weight:600}
+        
+        /* Typography - UPDATED */
+        h1{
+            margin:0;
+            font-size:32px; /* INCREASED */
+            color: var(--new-accent); /* NEW COLOR */
+            text-align: center; /* CENTERED */
+        }
+        
+        /* FIXED: Logo Style - Static positioning, centered block (non-floating) */
+        .logo-header-wrapper {
+            position: static; 
+            margin: 0 auto 20px auto; /* Centering block and adding bottom margin */
+            padding: 0; 
+            z-index: 1; /* Lowered z-index */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px; 
+            background: none; 
+            box-shadow: none; 
+        }
+
+        .logo-container { 
+            /* Logo replacement styling - BIGGER */
+            width: 200px; 
+            height: 200px; 
+            background-image: url('https://i.imgur.com/Df50Xpm.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* Hide the 'K' text */
+            text-indent: -9999px;
+            display: inline-block;
+            margin-left: 0;
+        }
+        
+        /* REMOVED: Logo text styling is no longer needed */
+        .logo-header-wrapper h1 { display: none; } 
+
+        h2{
+            font-size: 26px; /* INCREASED */
+            color: var(--new-accent); /* NEW COLOR */
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 8px; 
+            margin-top: 25px; 
+            font-weight: 700;
+            text-align: center; /* CENTERED */
+        }
+        /* Adjusted h3 style for product list for better readability */
+        h3{
+            font-size: 22px; /* INCREASED */
+            color: #444; 
+            margin: 15px 0 5px;
+            text-align: center; /* CENTERED */
+        }
+        .product-list h3 {
+             color: var(--new-accent); /* Highlight product names */
+             font-weight: 800; 
+             margin-bottom: 5px;
+             padding-bottom: 0;
+             border-bottom: none;
+             text-align: right; /* Keep product list H3 right aligned for better list flow */
+        }
+
+        p{margin:0;line-height:1.7; font-size: 18px;} /* INCREASED */
+        .lead{font-weight:700; font-size: 20px;} /* ADJUSTED & INCREASED */
+        
+        /* Lists and Special Text */
+        .natural-text { color: var(--new-accent); font-weight: 700; padding: 10px 0; border-right: 3px solid var(--new-accent); padding-right: 10px; font-size: 18px; } /* UPDATED COLOR AND FONT SIZE */
+        .feature-list { list-style: none; padding: 0; margin: 10px 0; }
+        /* FIXED: Changed nowrap → wrap to prevent unwanted gaps on mobile */
+        .feature-list li { 
+            margin-bottom: 10px; 
+            font-size: 18px; 
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; /* ← Key fix: allows text to wrap naturally, no extra gaps */
+        } 
+        .feature-list li strong { font-weight: 700; color: #333; } /* This CSS ensures only the bolded part is stronger */
+        .feature-icon { color: var(--new-accent); font-size: 24px; margin-left: 8px; line-height: 1; flex-shrink: 0; } /* flex-shrink: 0 to keep icon size */
         
         /* CTA & Coupon Styles */
         .cta{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-        .btn{background:var(--accent);color:#fff;border:none;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;transition:all 0.3s}
-        .btn:hover{background:#004d40;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,105,92,0.3)}
-        .price{font-size:20px;font-weight:700;color:#111}
-        .natural-text { color: var(--accent); font-weight: 600; }
+        .btn{background:var(--accent);color:#fff;border:none;padding:14px 20px;border-radius:10px;font-weight:700;cursor:pointer;transition:all 0.3s; text-align: center; box-shadow: 0 4px 10px rgba(0,105,92,0.2); font-size: 18px;} /* INCREASED PADDING/FONT */
+        .btn:hover{background:#004d40;transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,105,92,0.4)}
+        .price{font-size:26px;font-weight:800;color:var(--new-accent)} /* INCREASED & UPDATED COLOR */
         
         /* Coupon Styles */
         .coupon-section {
             display: flex;
-            gap: 10px;
-            align-items: flex-start; 
-            margin-top: 15px;
+            gap: 5px;
+            align-items: center; 
+            margin-top: 10px;
             flex-direction: column; 
-            align-items: center; /* Center coupon elements inside modal */
         }
         .coupon-input-group {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
+            width: 100%;
+            justify-content: center;
         }
         .coupon-section input {
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            width: 120px;
-            font-size: 14px;
+            width: 150px;
+            font-size: 16px;
             text-align: center;
             direction: ltr; 
         }
         .btn-apply {
-            background: #fff;
+            background: var(--accent);
             border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 8px 12px;
+            color: #fff;
+            padding: 10px 15px;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 16px;
             transition: all 0.2s;
         }
-        .btn-apply:hover {
-            background: var(--accent);
-            color: #fff;
-        }
+
         .coupon-msg {
-            font-size: 13px;
-            font-weight: 600;
-            min-height: 20px;
+            font-size: 15px;
+            font-weight: 700;
+            min-height: 18px;
             text-align: center;
         }
         .coupon-msg.success { color: var(--success); }
         .coupon-msg.error { color: var(--error); }
 
+        /* --- Carousel Specific CSS (UPDATED FOR FULL WIDTH AND CONTAIN) --- */
+        .carousel-wrap{
+            width:100%; /* Take full width of the app container */
+            max-width:1100px; /* Match max width of the card */
+            min-width:0; /* Allow it to shrink */
+            background: transparent; /* FIXED: Changed to transparent */
+            border-radius:12px;
+            overflow:hidden;
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            /* Center block horizontally */
+            margin: 0 auto 15px auto; /* REDUCED SPACE */
+            /* Added fixed height for image uniformity */
+            height: 400px; 
+        }
+        .slides-container {
+            width: 100%;
+            height: 100%; 
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%; /* Total width for 3 slides */
+            height: 100%; 
+            direction: ltr; 
+        }
+        .slide {
+            flex-shrink: 0;
+            width: calc(100% / 3); /* Each slide takes up 1/3 of the 300% width */
+            height: 100%;
+            direction: rtl; 
+        }
+        .slide img{
+            width:100%;
+            height:100%;
+            object-fit: contain; /* Remains 'contain' to avoid cropping */
+            display:block
+        }
+        /* --- End Carousel Specific CSS --- */
 
-        .carousel-wrap{width:520px;max-width:48%;min-width:300px;background: #f5f5f5;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-        .slide img{width:100%;height:100%;object-fit:cover;display:block}
 
-        /* Modal Styles */
-        .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;overflow-y: auto;}
+        /* --- Compact Modal Styles (UPDATED FOR PERFECT CENTERING) --- */
+        .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;}
         .modal.show{display:flex}
-        .modal-content{background:#fff;padding:30px;border-radius:16px;max-width:400px;width:90%;text-align:right;box-shadow:0 20px 60px rgba(0,0,0,0.3); margin: 50px 0;}
-        .modal h2{margin:0 0 15px;color:var(--accent); text-align: center;}
-        .modal p{margin:10px 0;line-height:1.6}
-        .modal-buttons{display:flex;gap:10px;margin-top:20px;justify-content:center; flex-wrap: wrap;}
-        select{width:70px;padding:5px;border-radius:6px;border:1px solid #ccc;font-size:14px;text-align:center;cursor:pointer}
-        .form-group{margin-bottom: 15px; text-align: right;}
+        
+        .modal-content{
+            background:var(--soft-white);
+            padding: 12px 18px; /* Further reduced padding */
+            border-radius:18px;
+            max-width:420px;
+            width:100%;
+            text-align:right;
+            box-shadow:0 30px 80px rgba(0,0,0,0.4); 
+            margin: auto; 
+            border-top: 5px solid var(--accent);
+            max-height: 95vh; 
+            overflow-y: auto; /* ENABLE SCROLLING INSIDE MODAL */
+            box-sizing: border-box;
+        }
 
-        /* --- Sidebar Styles --- */
-        #sidebar-toggle {
+        .modal h2{margin:0 0 10px;color:var(--new-accent); text-align: center; font-size: 26px; border-bottom: none; padding-bottom: 0;} /* INCREASED & UPDATED COLOR */
+        .modal h3{color:#333; margin-top: 5px; font-size: 20px; text-align: center; padding: 5px 0;} /* INCREASED */
+        .modal p{margin:5px 0;line-height:1.5; font-size: 16px;} /* INCREASED */
+        .modal-buttons{display:flex;gap:10px;margin-top:15px;justify-content:center; flex-wrap: wrap;}
+        
+        /* Compact Form Elements */
+        select{width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;font-size:16px;text-align:right;cursor:pointer; background-color: #f9f9f9;}
+        
+        .form-group{margin-bottom: 10px; text-align: right;} 
+        .form-group label{display: block; margin-bottom: 2px; font-weight: 600; color: #333; font-size: 14px;}
+        .form-group input, .form-group textarea{width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; background-color: #f9f9f9; min-height: 38px;}
+        .form-group textarea { resize: vertical; min-height: 60px; }
+        
+        .price-container {
+            text-align: center;
+            padding: 5px;
+            margin-top: 5px !important;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+            margin-left: 10px;
+            display: none;
+        }
+        .old-price.show { display: inline-block; }
+
+        /* Payment Modal Specific Styling */
+        #paymentModalTitle {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        #paymentModal .modal-content {
+            background: linear-gradient(135deg, var(--soft-white), #f0fff0); 
+            max-width: 380px;
+            padding: 25px;
+            text-align: center; 
+        }
+        #paymentModal p {
+            text-align: center;
+            font-size: 15px;
+            color: #555;
+            margin: 10px 0;
+        }
+        #paymentModal p strong {
+            display: block;
+            font-size: 24px;
+            color: var(--accent);
+            margin-top: 5px;
+        }
+        #paymentTotalAmount {
+            font-size: 32px !important; /* INCREASED & UPDATED COLOR */
+            font-weight: 800;
+            color: var(--new-accent); 
+            display: inline;
+            direction: ltr;
+        }
+        #paymentModal .modal-buttons { /* Specific rule for payment buttons margin to reduce gap */
+            margin-top: 5px; 
+        }
+        #openBitApp {
+            background-color: #4CAF50; 
+            transition: all 0.3s;
+            padding: 12px 20px;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        #openBitApp:hover {
+            background-color: #388E3C;
+        }
+
+        /* NEW: Flex group for total and copies */
+        .total-copies-group {
+             display: flex;
+             justify-content: space-around;
+             align-items: center;
+             gap: 15px;
+        }
+        .total-copies-group .form-group {
+             flex: 1;
+             margin-bottom: 0;
+        }
+        .total-copies-group .price-display {
+             flex-shrink: 0;
+             text-align: center;
+        }
+        /* Mobile adjustment for copies select width */
+        #productSelectionModal #copies {
+            width: 100%;
+        }
+        
+        /* Specific changes for Shipping Modal */
+        #shippingDetailsModal .modal-buttons .btn {
+            padding: 10px 15px; /* Reduced button padding for smaller size */
+            font-size: 16px;
+        }
+        #shippingDetailsModal .modal-content {
+            max-width: 380px; /* Adjusted max width for better mobile fit */
+        }
+        
+        /* --- General Instructions List with Red Bullets (UPDATED FOR RED TEXT AND BOLD) --- */
+        .general-instructions-list {
+            list-style: none; 
+            padding-right: 20px; 
+            margin-top: 10px;
+            font-size: 16px; 
+        }
+        .general-instructions-list li {
+            position: relative;
+            margin-bottom: 8px; 
+            padding-right: 12px; 
+            color: var(--error); /* MADE ALL TEXT RED */
+            line-height: 1.5;
+            font-weight: 700; /* ADDED: Make all text bold */
+        }
+        /* Custom red bullet for all items */
+        .general-instructions-list li::before {
+            content: '•'; 
             position: absolute;
+            right: 0;
+            color: var(--error); /* Red color for the bullet */
+            font-weight: 900;
+            font-size: 1.2em;
+            top: 0;
+        }
+        /* Style for the last, important item (keep bold - now redundant but harmless) */
+        .general-instructions-list li.important-note {
+            font-weight: 700; 
+            margin-bottom: 0;
+        }
+        
+        /* --- Sidebar Styles (UPDATED TO FLOATING/FIXED TOGGLE) --- */
+        #sidebar-toggle {
+            /* FIXED: Floating Styles */
+            position: fixed; 
             top: 20px;
-            left: 20px;
+            right: 20px; /* FIXED: Positioned to the right */
+            left: auto; /* Ensure left is not set */
+            
             background: var(--accent);
             color: #fff;
             border: none;
@@ -119,39 +384,67 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
-            z-index: 10;
+            z-index: 100; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .sidebar {
             position: fixed;
             top: 0;
-            right: -250px; /* מוסתר מחוץ למסך */
+            right: -270px; 
             width: var(--sidebar-width);
             height: 100%;
-            background: #fff;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            transition: right 0.3s ease-in-out;
-            z-index: 100; /* Z-index גבוה כדי לכסות הכל */
-            padding: 20px;
+            background: var(--soft-white);
+            box-shadow: none;
+            transition: right 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            z-index: 150; 
+            padding: 25px 20px;
             box-sizing: border-box;
             overflow-y: auto;
             text-align: right;
         }
         .sidebar.open {
-            right: 0; /* מצב פתוח: נכנס למסך */
-            z-index: 100;
+            right: 0; 
+            box-shadow: -4px 0 15px rgba(0,0,0,0.15); 
         }
         .close-sidebar {
             background: none;
             border: none;
-            font-size: 30px;
+            font-size: 35px;
             position: absolute;
             left: 10px;
-            top: 10px;
+            top: 5px;
             cursor: pointer;
-            color: #333;
+            color: var(--accent);
             line-height: 1;
+            font-weight: 300;
         }
-        /* סגנון לכיסוי השחור שמופיע מאחורי הסרגל */
+        .sidebar h3 {
+            color: var(--accent);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        .sidebar a:hover {
+            color: #00897B; 
+            padding-right: 5px;
+        }
+        
+        /* Overlay for Sidebar */
         .overlay {
             display: none;
             position: fixed;
@@ -160,28 +453,123 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 90; /* מתחת לסרגל אבל מעל שאר התוכן */
+            z-index: 120; 
             cursor: pointer;
         }
         .overlay.show {
             display: block;
         }
+
+        /* NEW: Gift package image gallery */
+        .gift-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .gift-gallery img {
+            width: 300px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
         /* Responsive */
         @media (max-width:900px){
-            .card{flex-direction:column-reverse}
-            .carousel-wrap{width:100%;max-width:none;min-width:0;height:320px}
-            .content{padding:18px}
+            .card{
+                display: block;
+            }
+            .carousel-wrap{
+                width:100%;
+                max-width:1100px;
+                min-width:0;
+                height:350px;
+                margin-bottom: 10px;
+            }
+            .content{padding:18px;}
+            
+            .logo-header-wrapper {
+                 margin-bottom: 15px;
+            }
+            .logo-container { 
+                width: 120px;
+                height: 120px;
+            }
+            
             #sidebar-toggle {
-                position: fixed;
+                right: 15px;
+                left: auto;
                 top: 15px;
-                left: 15px;
+                margin: 0;
+                padding: 8px 12px;
+                font-size: 14px;
+                z-index: 1000;
+            }
+            
+            .app {
+                padding-top: 24px;
+            }
+            
+            /* Mobile: smaller font + wrap allowed */
+            .feature-list li { 
+                font-size: 15px;
+                flex-wrap: wrap; /* Ensures consistent spacing on mobile */
+            }
+            
+            /* Modal adjustments for smaller devices */
+            .modal-content {
+                padding: 10px;
+                width: 95%;
+            }
+            .form-group { margin-bottom: 5px; }
+            .modal h2 { font-size: 24px; margin-bottom: 5px; }
+            .modal h3 { margin-top: 3px; font-size: 18px; padding: 3px 0; margin-bottom: 3px; }
+            hr { margin: 8px 0 !important; }
+            
+            #shippingDetailsModal .modal-content {
+                max-width: 95vw;
+                padding: 15px;
+            }
+            #shippingDetailsModal .modal-buttons .btn {
+                padding: 10px 10px;
+                font-size: 15px;
+            }
+
+            .gift-gallery img {
+                width: 100%;
+                max-width: 300px;
             }
         }
-        @media (max-width: 500px) {
+        
+        @media (max-width: 550px) {
+            .logo-container { 
+                width: 100px;
+                height: 100px;
+            }
+            
+            #sidebar-toggle {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
             .sidebar {
-                width: 90%;
+                --sidebar-width: 220px; 
+                right: -240px; 
+            }
+            .sidebar.open {
+                right: 0; 
+            }
+            
+            .app {
+                padding-top: 24px;
+            }
+
+            .feature-list li {
+                flex-wrap: wrap; /* Consistent on very small screens */
             }
         }
+
     </style>
 </head>
 <body>
@@ -191,90 +579,220 @@
         <h3>תוכן עניינים ✨</h3>
         <ul>
             <li><a href="#product-description">אודות המוצר</a></li>
-            <li><a href="#how-it-works">איך זה עובד?</a></li>
             <li><a href="#benefits">יתרונות הסבון</a></li>
-            <li><a href="#ingredients">רכיבים טבעיים</a></li>
-            <li><a href="#faq">שאלות נפוצות</a></li>
+            <li><a href="#about-coral">הסיפור שלנו</a></li>
+            <li><a href="#product-variations">🌱 המוצרים שלנו</a></li>
             <li><a href="#order-form">הזמנה ותשלום</a></li>
         </ul>
         <p style="margin-top: 30px; font-size: 14px; color: #666;">
             לכל שאלה נוספת, ניתן ליצור קשר.
+            <br>
+            קורל: 050-8463242
         </p>
     </div>
 
     <div class="app">
+        
+        <div class="logo-header-wrapper">
+            <span class="logo-container">K</span> 
+        </div>
+        
         <button id="sidebar-toggle">תפריט ☰</button>
-        <div class="logo-container">
-            <img src="https://i.imgur.com/sLoJrqk.png" alt="לוגו טבעי" class="logo">
+        
+        <div class="carousel-wrap" aria-roledescription="carousel">
+            <div class="slides-container">
+                <div class="slides" id="slides">
+                    <div class="slide"><img alt="סבון מחלב אם טבעי - תמונה 1" src="https://i.imgur.com/cjbToe2.jpeg"/></div>
+                    <div class="slide"><img alt="סבון מחלב אם טבעי - תמונה 2" src="https://i.imgur.com/E1cDUXD.jpeg"/></div>
+                    <div class="slide"><img alt="סבון מחלב אם טבעי - תמונה 3" src="https://i.imgur.com/m2nDchP.jpeg"/></div>
+                </div>
+            </div>
         </div>
         <div class="card" role="application">
+            
             <div class="content">
 
-                <h1>🧼 סבון טבעי מחלב אם: מתנת הטבע לעור הרך</h1>
+                <h1>סבון טבעי מחלב אם</h1>
+                <p class="lead" style="color: #444; text-align: center;">
+                    טבעי. אישי. מהלב
+                </p>
 
                 <p class="lead" id="product-description">
-                    הכירו את הסבון הטבעי המיוחד שלנו, המשלב את כל הטוב שבחלב אם עם שמנים ורכיבים בוטניים אורגניים. פתרון מושלם לעור רגיש, יבש או מגורה.
+                    העניקי לתינוקך מתנה מפנקת ומזינה – אל-סבון ייחודי וטבעי העשוי מחלב האם שלך. הזנה ישירה דרך העור.
                 </p>
 
-                <p class="natural-text">
-                    **מיוצר באהבה ובשיטה מסורתית קרה** – לשמירה מקסימלית על הרכיבים הפעילים והמינרלים בחלב האם.
-                </p>
-
-                <hr>
+                <div class="natural-text">
+                    הסבון משלב את חלב האם עם שמנים טבעיים נוספים, ונועד להקל על תסמיני יובש, גירוי, אדמומיות ותסמיני אסתמה של העור. 
+                </div>
 
                 <h2 id="benefits">🌿 יתרונות הסבון הטבעי</h2>
-                <ul>
-                    <li>**הזנה ורכות:** חלב אם עשיר בנוגדנים, ויטמינים ושומנים חיוניים המזינים את עור התינוק והאם.</li>
-                    <li>**הקלה והרגעת עור:** מומלץ במיוחד לעור הסובל מאקזמה, פריחה או גירויים (כולל "כובע" בראש התינוק).</li>
-                    <li>**100% טבעי:** ללא SLS, פראבנים, חומרי ריח סינטטיים או כימיקלים קשים.</li>
+                <ul class="feature-list">
+                    <li><span class="feature-icon">✔️</span> <strong>מגיל לידה:</strong>מתאים לעור הרגיש ביותר.</li>
+                    <li><span class="feature-icon">✨</span> <strong>הקלה מיידית:</strong>מתאים לעור רגיש ולתינוקות שסובלים מ"קליפה" (קשקשת) בראש.</li>
+                    <li><span class="feature-icon">🌱</span> <strong>רכיבים טבעיים בלבד:</strong>ללא SLS, פראבנים, חומרי ריח סינטטיים או כימיקלים קשים.</li>
+                    <li><span class="feature-icon">👐</span> <strong>ייצור בשיטה קרה:</strong>מיוצר בעבודת יד, תוך שמירה מקסימלית על הרכיבים הפעילים והמינרלים שבחלב האם.</li>
                 </ul>
 
-                <h2 id="ingredients">🌱 רכיבים וייצור</h2>
+                <h2 id="about-coral">💖 קצת עליי ועל סגולות חלב האם</h2>
                 <p>
-                    הסבון שלנו מכיל תערובת מנצחת של חלב אם, **שמן זית כתית מעולה**, **חמאת שיאה** ושמנים אתריים עדינים. כל סבון מיוצר בתהליך ייצור קפדני (Cold Process) השומר על תכונות הריכוך והלחות של הרכיבים.
+                    נעים להכיר, שמי קורל, עורכת-דין ואימא לשני בנים מקסימים. הרעיון לייצר אל-סבון מחלב אם נולד מתוך ניסיוני האישי עם בני הבכור שסבל מתסמינים קשים של אסתמה של העור.
                 </p>
+                <p>
+                    לאחר שניסיתי אינספור תכשירים יקרים ללא הצלחה, נחשפתי לסגולות האדירות של חלב אם כתרכובת מזינה, מלאת לחות ונוגדנים. מאז שהתחלתי לרקוח סבוני חלב אם, עורו של בני השתפר פלאים. הרגשתי שאני חייבת לחלוק את הפלא הזה גם עם אימהות אחרות.
+                </p>
+                
+                <h2 id="product-variations">🌱 המוצרים שלנו:</h2>
+
+                <p style="font-size: 18px; font-weight: 700; color: var(--error); text-align: center; margin-bottom: 20px;">
+                    ⚠️ מינימום הזמנה: 2 יחידות
+                </p>
+                
+                <p style="font-size: 16px; font-weight: 600; color: var(--accent); margin-bottom: 15px; border-right: 3px solid var(--accent); padding-right: 10px;">
+                    ניתן לבקש מתכון מותאם אישית, לפי הנתונים האישיים של עור התינוק שלך.
+                </p>
+
+                <div class="product-list" style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <div class="product-item">
+                        <h3>1. מגע מזין</h3>
+                        <p style="font-weight: 600;">תכשיר לחות שמעניק לחות עמוקה לעור יבש, כמו חיבוק מחמם של אימא.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון גוף עדין ומעורר לחות לעור יבש. מכיל חמאת שיאה ושמן שקדים.</p>
+                    </div>
+
+                    <div class="product-item">
+                        <h3>2. מגע מתוק</h3>
+                        <p style="font-weight: 600;">תכשיר לחות מפנק עם ריח טבעי עדין, כמו נשיקה אוהבת של אימא.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון מפנק עם ריח טבעי עדין של קקאו. מכיל חמאת קקאו ושמן זית.</p>
+                    </div>
+
+                    <div class="product-item">
+                        <h3>3. מגע טהור</h3>
+                        <p style="font-weight: 600;">תכשיר לחות עדין לניקוי עור רגיש, כמו מגע נקי וטהור של אימא.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון פנים עדין לניקוי עור רגיש. מכיל חימר לבן ושמן חוחובה.</p>
+                    </div>
+
+                    <div class="product-item">
+                        <h3>4. מגע פורח</h3>
+                        <p style="font-weight: 600;">תכשיר לחות מרגיע לעור אדמומי, כמו ליטוף אימהי עדין.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון גוף מרגיע לעור אדמומי או מגורה. מכיל שמן קלנדולה אורגני ושיבולת שועל.</p>
+                    </div>
+
+                    <div class="product-item">
+                        <h3>5. מגע אוהב</h3>
+                        <p style="font-weight: 600;">תכשיר לחות עדין לניקוי עור ושיער, כמו אהבת אם שאינה נגמרת.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון עדין לניקוי השיער והקרקפת. מכיל שמן קיק ושמן זרעי ענבים.</p>
+                    </div>
+
+                    <div class="product-item">
+                        <h3>6. מגע חמים</h3>
+                        <p style="font-weight: 600;">תכשיר לחות מזין לעור יבש, כמו תחושת חמימות של בית ואימא.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון מזין לעור יבש במיוחד. מכיל שמן שומשום.</p>
+                    </div>
+                    
+                    <div class="product-item">
+                        <h3>7. מגע מגונן</h3>
+                        <p style="font-weight: 600;">תכשיר לחות לעור רגיש ועדין, כמו יד אימהית מגוננת.</p>
+                        <p style="font-size: 14px; color: #555;">אל-סבון טיפולי לעור רגיש, מתאים במיוחד לתינוקות עם נטייה לאדמומיות. מכיל שמן אובליפיחה אורגני.</p>
+                    </div>
+
+                </div>
+
+                <h2 style="margin-top: 40px;">🎁 מארז ליולדת</h2>
+                <p style="font-size: 18px; text-align: center;">
+                    מתנה מרגשת ומקסימה לחברה שחובקת תינוק חדש וטהור.<br>
+                    במארז ליולדת ניתן לקבל את המתכונים הנ"ל בשבלונות מתוקות ומיוחדות, במארז מפנק ומרגש!
+                </p>
+
+                <div class="gift-gallery">
+                    <img src="https://i.imgur.com/YyqzypY.jpeg" alt="מארז סבונים בצורת לב - דוגמה 1 (להמחשה בלבד)">
+                    <img src="https://i.imgur.com/NbDhnFU.jpeg" alt="מארז סבונים בצורת לב - דוגמה 2 (להמחשה בלבד)">
+                    <img src="https://i.imgur.com/RiayNqR.jpeg" alt="מארז סבונים בצורת לב - דוגמה 3 (להמחשה בלבד)">
+                </div>
+
+                <p style="font-size: 14px; color: #666; text-align: center; margin-top: 10px;">
+                    * התמונות להמחשה בלבד. ט.ל.ח
+                </p>
+
+                <h3 style="margin-top: 30px; border-bottom: 2px solid #eee; padding-bottom: 5px; color: var(--new-accent); text-align: center;">⚠️ הנחיות כלליות</h3>
+                
+                <p style="font-size: 16px; color: #555; margin-bottom: 5px;">
+                    איך זה עובד? ניתן להביא את חלב האם האישי שלך למספר נקודות איסוף, או להשתמש בחלב אם של תורמת. כמות החלב הדרושה היא 40 מ"ל ליחידה. 
+                </p>
+                
+                <ul class="general-instructions-list">
+                    <li>הסבון אינו תרופה ואינו ראוי למאכל.</li>
+                    <li>אין לבלוע, יש להפסיק את השימוש במקרה של גירוי.</li>
+                    <li>היות שמדובר באל-סבון עבודת יד, הרי שהגודל, הצבע, המרקם והמשקל עשויים להשתנות.</li>
+                    <li class="important-note">תוקף הסבון: חודשיים. יש לשמור בקירור.</li>
+                </ul>
 
                 <h2 id="order-form">🎁 הזמנה ותשלום</h2>
                 
-                <div class="cta" style="margin-top: 30px;">
+                <div class="cta" style="margin-top: 10px;">
                     <button class="btn" id="openOrderModalBtn" style="width: 100%;">להזמנה ולמעבר לתשלום 🛒</button>
                 </div>
                 
             </div>
-
-            <div class="carousel-wrap" aria-roledescription="carousel">
-                <div class="slides-container">
-                    <div class="slides" id="slides">
-                        <div class="slide"><img alt="סבון מחלב אם טבעי" src="https://i.imgur.com/CQZCkT5.jpeg"/></div>
-                    </div>
-                </div>
+            
             </div>
-        </div>
     </div>
 
-    <div class="modal" id="shippingModal">
+    <div class="modal" id="productSelectionModal">
         <div class="modal-content">
-            <h2>הזמנה ופרטי משלוח 📦</h2>
-            <p>אנא בחרו כמות ומלאו פרטים:</p>
+            <h2>שלב 1: בחירת מוצר ועיצוב 🧼</h2>
             
-            <div class="form-group" style="text-align: center;">
-                <label for="copies" style="font-size: 16px; margin-bottom: 8px;">כמות סבונים (יחידות):</label>
-                <select id="copies" style="width: 100px;">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+            <div class="form-group">
+                <label for="copies">כמות סבונים:</label>
+                <select id="copies">
+                    <option value="2">2 יח' (₪80)</option>
+                    <option value="4">4 יח' (₪160)</option>
+                    <option value="6">6 יח' (₪240)</option>
+                    <option value="10">10 יח' (₪400)</option>
                 </select>
-                <div class="price-container" style="margin-top: 15px;">
-                    <span class="old-price" id="oldPrice" style="font-size: 14px;"></span>
-                    <div class="price" id="totalPrice" style="font-size: 24px;">₪45</div>
-                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="recipe">שם המתכון / מגע:</label>
+                <select id="recipe" required>
+                    <option value="" disabled selected>בחר מתכון (מגע מזין, מתוק, טהור...)</option>
+                    <option value="מגע מזין">מגע מזין</option>
+                    <option value="מגע מתוק">מגע מתוק</option>
+                    <option value="מגע טהור">מגע טהור</option>
+                    <option value="מגע פורח">מגע פורח</option>
+                    <option value="מגע אוהב">מגע אוהב</option>
+                    <option value="מגע חמים">מגע חמים</option>
+                    <option value="מגע מגונן">מגע מגונן</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="shape">צורה:</label>
+                <select id="shape" required>
+                    <option value="" disabled selected>בחר צורה</option>
+                    <option value="מלבנית">מלבנית</option>
+                    <option value="שושנה">שושנה</option>
+                    <option value="לב">לב</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="essentialOil">שמן אתרי:</label>
+                <select id="essentialOil">
+                    <option value="ללא">ללא</option>
+                    <option value="לבנדר">לבנדר</option>
+                    <option value="קמומיל">קמומיל</option>
+                    <option value="עץ התה">עץ התה</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="blessing">הוספת ברכה (טקסט עד 50 אותיות - אופציונלי):</label>
+                <textarea id="blessing" maxlength="50" placeholder="לדוגמה: לילד המתוק שלנו, באהבה גדולה."></textarea>
+            </div>
+            
+            <div class="price-container">
+                <div class="price" id="totalPrice" style="font-size: 24px;">₪80</div>
+                <span class="old-price" id="oldPrice"></span>
             </div>
 
             <div class="coupon-section">
@@ -284,28 +802,49 @@
                 </div>
                 <div class="coupon-msg" id="couponMsg"></div>
             </div>
-            <hr style="border: 0; border-top: 1px dashed #eee; margin: 20px 0;">
 
+            <div class="modal-buttons">
+                <button class="btn" id="continueToShippingBtn" style="flex-grow: 1;">המשך לפרטי משלוח</button>
+                <button class="btn close-modal" data-modal="productSelectionModal" style="background: #999; flex-grow: 1;">ביטול</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="shippingDetailsModal">
+        <div class="modal-content">
+            <h2>שלב 2: פרטי משלוח והתאמה 🚚</h2>
+            
             <div class="form-group"><label for="shippingName">שם מלא</label><input type="text" id="shippingName" required placeholder="שם ושם משפחה"></div>
             <div class="form-group"><label for="shippingPhone">טלפון</label><input type="tel" id="shippingPhone" required placeholder="05X-XXXXXXX"></div>
             <div class="form-group"><label for="shippingEmail">דוא"ל</label><input type="email" id="shippingEmail" required placeholder="example@mail.com"></div>
             <div class="form-group"><label for="shippingCity">עיר</label><input type="text" id="shippingCity" required placeholder="לדוגמה: תל אביב"></div>
-            <div class="form-group"><label for="shippingAddress">כתובת מלאה</label><input type="text" id="shippingAddress" required placeholder="רחוב, מספר בית, דירה"></div>
+            <div class="form-group"><label for="shippingAddress">כתובת</label><input type="text" id="shippingAddress" required placeholder="רחוב, מספר בית, דירה"></div>
+            
+            <hr style="border: 0; border-top: 1px dashed #eee; margin: 8px 0;">
+
+            <div class="form-group"><label for="babyAge">גיל התינוק (חודשים)</label><input type="number" id="babyAge" required placeholder="לדוגמה: 3" min="0" max="48"></div>
+            <div class="form-group"><label for="allergies">אלרגיות / הערות נוספות (אופציונלי)</label><textarea id="allergies" placeholder="ציין אלרגיות ידועות או בקשות נוספות"></textarea></div>
+
             <div class="modal-buttons">
-                <button class="btn" id="continueToPaymentBtn">המשך לתשלום (Bit / כרטיס)</button>
-                <button class="btn close-modal" data-modal="shippingModal">ביטול</button>
+                <button class="btn" id="backToProductsBtn" style="background: #999; flex-grow: 1;">חזרה לבחירת מוצר</button>
+                <button class="btn" id="continueToPaymentBtn" style="flex-grow: 1;">המשך לתשלום</button>
             </div>
         </div>
     </div>
     
     <div class="modal" id="paymentModal">
         <div class="modal-content">
-            <h2 id="paymentModalTitle">שלב התשלום</h2>
-            <p><strong>סכום לתשלום: <span id="paymentTotalAmount">₪45</span></strong></p>
-            <p>לאחר לחיצה על "מעבר לתשלום" תישלח אליכם **הזמנת תשלום** (לינק) במייל/SMS, ופרטי ההזמנה שלכם יועברו לטיפול.</p>
-            <div class="modal-buttons">
-                <button class="btn" id="openBitApp">מעבר לתשלום מאובטח</button>
-                <button class="btn close-modal" data-modal="paymentModal">ביטול</button>
+            <h2 id="paymentModalTitle">שלב התשלום ✅</h2>
+            <p>
+                <strong>סכום סופי לתשלום: <span id="paymentTotalAmount">₪80</span></strong>
+            </p>
+            <hr style="border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+            <p style="font-size: 14px;">
+                לחיצה על הכפתור תשלח אלינו את פרטי ההזמנה שלך ותעביר אותך לתשלום מאובטח באמצעות אפליקציית Bit.
+            </p>
+            <div class="modal-buttons" style="flex-direction: column; width: 100%;">
+                <button class="btn" id="openBitApp" style="width: 100%;">מעבר לתשלום (Bit)</button>
+                <button class="btn close-modal" data-modal="paymentModal" style="background: #999; width: 100%; margin-top: 5px;">ביטול וחזרה</button>
             </div>
         </div>
     </div>
@@ -313,15 +852,15 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     
     <script>
-        // 🛑 STEP 1: Replace 'YOUR_USER_ID' with your actual EmailJS User ID
+        // החלף ב-User ID האמיתי שלך מ-EmailJS
         emailjs.init('ecHybfD_vT68aQGnO'); 
 
-        const PRICE_PER_BOOK = 45; 
+        const PRICE_PER_SOAP = 40; 
         
-        // --- Coupon Logic Variables ---
         const COUPONS = {
-            'TALYA20': 0.20, 
-            'TALYA10': 0.10  
+            'CORAL20': 0.20, // 20% discount
+            'MAMA10': 0.10,  // 10% discount
+            'YOLEDET': 0.15 // 15% discount
         };
         let isDiscountApplied = false;
         let discountRate = 0; 
@@ -331,19 +870,41 @@
         const totalPriceEl = document.getElementById('totalPrice');
         const oldPriceEl = document.getElementById('oldPrice'); 
         
-        // NEW: Button to open the order modal
         const openOrderModalBtn = document.getElementById('openOrderModalBtn'); 
 
-        const shippingModal = document.getElementById('shippingModal');
+        // Step 1 Modals
+        const productSelectionModal = document.getElementById('productSelectionModal');
+        const continueToShippingBtn = document.getElementById('continueToShippingBtn');
+        
+        // Step 2 Modals
+        const shippingDetailsModal = document.getElementById('shippingDetailsModal');
+        const backToProductsBtn = document.getElementById('backToProductsBtn');
         const continueToPaymentBtn = document.getElementById('continueToPaymentBtn');
+        
+        // Step 3 Modals
         const paymentModal = document.getElementById('paymentModal');
         const paymentTotalAmount = document.getElementById('paymentTotalAmount');
         const openBitApp = document.getElementById('openBitApp'); 
 
-        // Coupon Elements
         const couponInput = document.getElementById('couponCode');
         const applyCouponBtn = document.getElementById('applyCouponBtn');
         const couponMsg = document.getElementById('couponMsg');
+
+        // NEW ORDER FIELDS
+        const recipeInput = document.getElementById('recipe');
+        const shapeInput = document.getElementById('shape');
+        const essentialOilInput = document.getElementById('essentialOil');
+        const blessingInput = document.getElementById('blessing');
+        
+        // SHIPPING FIELDS
+        const shippingName = document.getElementById('shippingName');
+        const shippingPhone = document.getElementById('shippingPhone');
+        const shippingEmail = document.getElementById('shippingEmail');
+        const shippingCity = document.getElementById('shippingCity');
+        const shippingAddress = document.getElementById('shippingAddress');
+        const babyAge = document.getElementById('babyAge');
+        const allergies = document.getElementById('allergies');
+
 
         // Sidebar Elements
         const sidebar = document.getElementById('sidebar');
@@ -351,26 +912,37 @@
         const closeSidebarBtn = document.getElementById('close-sidebar-btn');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-
         let currentOrderData = {};
 
+        // פונקציה לקבלת תאריך ושעה בפורמט עברי
+        function getCurrentDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return now.toLocaleDateString('he-IL', options);
+        }
+
         function updateTotal() {
-            const quantity = parseInt(copiesInput.value) || 1;
-            let total = PRICE_PER_BOOK * quantity;
+            const quantity = parseInt(copiesInput.value) || 2;
+            let total = PRICE_PER_SOAP * quantity;
+            let finalTotal = total;
             
             if (isDiscountApplied) {
-                const originalTotal = total;
-                total = total * (1 - discountRate);
-                total = Math.round(total);  
-                
-                oldPriceEl.textContent = `₪${originalTotal}`;
+                finalTotal = Math.round(total * (1 - discountRate));
+                oldPriceEl.textContent = `₪${total}`;
                 oldPriceEl.classList.add('show');
             } else {
                 oldPriceEl.classList.remove('show');
             }
 
-            totalPriceEl.textContent = `₪${total}`;
-            paymentTotalAmount.textContent = `₪${total}`; 
+            totalPriceEl.textContent = `₪${finalTotal}`;
+            paymentTotalAmount.textContent = `₪${finalTotal}`; 
         }
 
         function applyCoupon() {
@@ -382,7 +954,7 @@
                     discountRate = COUPONS[inputCode]; 
                     const discountPercent = discountRate * 100;
 
-                    couponMsg.textContent = `הקופון הופעל בהצלחה! (${discountPercent}% הנחה)`;
+                    couponMsg.textContent = `הקופון הופעל! (${discountPercent}% הנחה)`;
                     couponMsg.className = "coupon-msg success";
                     
                     couponInput.disabled = true; 
@@ -391,10 +963,10 @@
                     updateTotal();
                 }
             } else if (inputCode === "") {
-                couponMsg.textContent = "אנא הזן קוד קופון";
+                couponMsg.textContent = "הזן קוד";
                 couponMsg.className = "coupon-msg error";
             } else {
-                couponMsg.textContent = "קוד קופון שגוי";
+                couponMsg.textContent = "קוד שגוי";
                 couponMsg.className = "coupon-msg error";
             }
         }
@@ -421,50 +993,55 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
-                    toggleSidebar();
+                    if (sidebar.classList.contains('open')) {
+                         toggleSidebar();
+                    }
                 }
             });
         });
 
-        // --- Email Sending Function ---
+        // --- שליחת המייל עם כל הפרטים הדרושים ---
         function sendOrderEmail() {
             if (Object.keys(currentOrderData).length === 0) {
-                console.error('Error: No order data available for email sending.');
                 return;
             }
 
-            emailjs.send('service_cprtttd', 'template_m39ushb', {
-                to_email: 'c203240130@gmail.com', 
-                name: currentOrderData.name,
-                phone: currentOrderData.phone,
-                email: currentOrderData.email,
-                city: currentOrderData.city,
-                address: currentOrderData.address,
-                copies: currentOrderData.copies,
-                total: currentOrderData.totalPrice,
-                product_name: "סבון טבעי מחלב אם" 
-            })
-            .then(function(response) {
-                console.log('SUCCESS! Order details sent to seller.', response.status, response.text);
-            }, function(error) {
-                console.log('FAILED to send order details.', error);
-            });
+            const templateParams = {
+                name: currentOrderData.name || '',
+                phone: currentOrderData.phone || '',
+                email: currentOrderData.email || '',
+                city: currentOrderData.city || '',
+                address: currentOrderData.address || '',
+                time: getCurrentDateTime(),
+                copies: currentOrderData.copies + ' יחידות',
+                recipe: currentOrderData.recipe || '',
+                shape: currentOrderData.shape || '',
+                essentialOil: currentOrderData.essentialOil || 'ללא',
+                dedication: currentOrderData.blessing || 'ללא הקדשה',
+                babyAge: currentOrderData.babyAge ? currentOrderData.babyAge + ' חודשים' : 'לא צוין',
+                allergies: currentOrderData.allergies || 'ללא',
+                total: currentOrderData.totalPrice
+            };
+
+            emailjs.send('service_cprtttd', 'template_m39ushb', templateParams)
+                .then(function(response) {
+                    console.log('מייל נשלח בהצלחה!', response.status, response.text);
+                }, function(error) {
+                    console.warn('שגיאה בשליחת מייל:', error);
+                });
         }
+        // --- סיום שליחת המייל ---
 
-
-        // --- Event Listeners and Logic ---
-        
-        // NEW: Open Shipping Modal
         openOrderModalBtn.addEventListener('click', ()=>{ 
             updateTotal();
-            shippingModal.classList.add('show'); 
+            productSelectionModal.classList.add('show'); 
         });
 
-        // Price and Coupon Logic moved to be active inside the modal
         copiesInput.addEventListener('change', updateTotal);
         applyCouponBtn.addEventListener('click', applyCoupon);
         couponInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
+                e.preventDefault(); 
                 applyCoupon();
             }
         });
@@ -472,29 +1049,31 @@
         updateTotal(); 
 
 
-        // Carousel Logic (kept for basic image display)
+        // --- CAROUSEL LOGIC (RTL FIXED) ---
         (function(){
             const slidesEl = document.getElementById('slides');
             const slides = Array.from(slidesEl.children);
-            if (slides.length <= 1) return; // Disable carousel if only one slide
-            // const dotsEl = document.getElementById('dots'); // לא קיים ב-HTML
-            // const prev = document.getElementById('prev'); // לא קיים ב-HTML
-            // const next = document.getElementById('next'); // לא קיים ב-HTML
+            if (slides.length <= 1) return;
             let index = 0;
-            const intervalMs = 3000;
+            const intervalMs = 3000; // Time per slide
             let timer = null;
             
-
             function update(){
-                if (slidesEl) slidesEl.style.transform = `translateX(${-index*100}%)`;
+                const slideWidth = 100 / slides.length; 
+                
+                slidesEl.style.transform = `translateX(${index * slideWidth}%)`;
             }
 
-            function nextSlide(){ index = (index+1) % slides.length; update(); }
-            function prevSlide(){ index = (index-1 + slides.length) % slides.length; update(); }
-            function goTo(i){ index = ((i%slides.length)+slides.length)%slides.length; update(); resetTimer(); }
-
-            function startTimer(){ if(timer) clearInterval(timer); timer = setInterval(nextSlide, intervalMs); }
-            function resetTimer(){ startTimer(); }
+            function nextSlide(){ 
+                index = (index + 1) % slides.length; 
+                update(); 
+            }
+            
+            function startTimer(){ 
+                if(timer) clearInterval(timer); 
+                timer = setInterval(nextSlide, intervalMs); 
+            }
+            
             startTimer();
 
             const carouselWrap = document.querySelector('.carousel-wrap');
@@ -503,56 +1082,94 @@
 
             update();
         })();
+        // --- END CAROUSEL LOGIC ---
 
-
-        // Handle 'Continue to Payment' button (Validation & Data Storage)
-        continueToPaymentBtn.addEventListener('click', (e)=>{
-            const name = document.getElementById('shippingName').value.trim();
-            const phone = document.getElementById('shippingPhone').value.trim();
-            const email = document.getElementById('shippingEmail').value.trim();
-            const city = document.getElementById('shippingCity').value.trim();
-            const address = document.getElementById('shippingAddress').value.trim();
-            const copies = copiesInput.value;
-            const totalPrice = paymentTotalAmount.textContent;
+        // --- Step 1 to Step 2 Transition ---
+        continueToShippingBtn.addEventListener('click', ()=>{
+            const recipe = recipeInput.value;
+            const shape = shapeInput.value;
             
-            if (!name || !phone || !email || !city || !address) {
-                alert('אנא מלאו את כל פרטי המשלוח הנדרשים.');
+            if (!recipe) {
+                alert('אנא בחרו מתכון/מגע.');
+                return;
+            }
+            if (!shape) {
+                alert('אנא בחרו צורה רצויה.');
                 return;
             }
             
-            currentOrderData = { name, phone, email, city, address, copies, totalPrice }; 
+            currentOrderData.copies = copiesInput.value;
+            currentOrderData.totalPrice = paymentTotalAmount.textContent;
+            currentOrderData.recipe = recipe;
+            currentOrderData.shape = shape;
+            currentOrderData.essentialOil = essentialOilInput.value;
+            currentOrderData.blessing = blessingInput.value.trim();
 
-            closeModal(shippingModal);
+            closeModal(productSelectionModal);
+            shippingDetailsModal.classList.add('show');
+        });
+
+        // --- Step 2 Back to Step 1 ---
+        backToProductsBtn.addEventListener('click', ()=>{
+            closeModal(shippingDetailsModal);
+            productSelectionModal.classList.add('show');
+        });
+        
+        // --- Step 2 to Step 3 Transition ---
+        continueToPaymentBtn.addEventListener('click', (e)=>{
+            const name = shippingName.value.trim();
+            const phone = shippingPhone.value.trim();
+            const email = shippingEmail.value.trim();
+            const city = shippingCity.value.trim();
+            const address = shippingAddress.value.trim();
+            const age = babyAge.value.trim();
+            const notes = allergies.value.trim();
+            
+            if (!name || !phone || !email || !city || !address || !age) {
+                alert('אנא מלאו את כל פרטי המשלוח וההתאמה האישית (כולל גיל התינוק).');
+                return;
+            }
+            
+            currentOrderData.name = name;
+            currentOrderData.phone = phone;
+            currentOrderData.email = email;
+            currentOrderData.city = city;
+            currentOrderData.address = address;
+            currentOrderData.babyAge = age;
+            currentOrderData.allergies = notes;
+
+            closeModal(shippingDetailsModal);
             paymentModal.classList.add('show');
         });
 
         openBitApp.addEventListener('click', ()=>{
             sendOrderEmail(); 
-            alert('פרטי ההזמנה נשלחו בהצלחה! כעת תועברו למערכת התשלום (סימולציה).');
-            window.open('https://example.com/payment-link', '_blank');
+            
+            window.open('https://www.bitpay.co.il/app/me/9364874B-AF78-48EC-1189-1141F63194B7269A', '_blank');
 
             closeModal(paymentModal);
         });
 
-
-        // Close Modals using the 'ביטול' buttons or outside click
         document.querySelectorAll('.close-modal').forEach(button => {
             button.addEventListener('click', () => {
                 const modalId = button.dataset.modal || (button.closest('.modal') ? button.closest('.modal').id : null);
-                if (modalId) {
+                if (modalId === 'paymentModal') {
+                    closeModal(document.getElementById(modalId));
+                    shippingDetailsModal.classList.add('show');
+                } else if (modalId) {
                     closeModal(document.getElementById(modalId));
                 }
             });
         });
 
         document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => { 
-                if(e.target === modal){ 
+            modal.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
                     closeModal(modal);
-                } 
+                }
             });
         });
+
     </script>
 </body>
-
 </html>
